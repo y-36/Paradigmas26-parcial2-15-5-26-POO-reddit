@@ -1,0 +1,26 @@
+# Scala/sbt
+target/
+project/target/
+dist/
+*.class
+*.jar
+
+# Bloop
+.bloop/
+
+# Metals
+.metals/
+
+# IDE
+.vscode/
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# macOS
+.DS_Store
+
+# Scala-specific
+.scala_dependencies
+.worksheet/

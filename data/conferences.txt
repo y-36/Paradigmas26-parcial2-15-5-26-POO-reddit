@@ -1,0 +1,10 @@
+ICFP
+Scala Days
+Strange Loop
+JVM Language Summit
+ScalaMatsuri
+LambdaConf
+Clojure/conj
+ReactConf
+JavaOne
+PyCon
