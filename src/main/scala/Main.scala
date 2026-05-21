@@ -12,10 +12,9 @@ object Main {
       val titles = FileIO.extractPostTitles(json)
       println(s"\n${"=" * 60}\n$url\n${"=" * 60}")
       titles.flatMap { title =>
-        val allEntities = Analyzer.detectEntities(title, dictionary)
-        val relevantEntities = Analyzer.detectRelevant(title, dictionary)
-        println(Formatters.formatGroupedNERResult(title, relevantEntities))
-        allEntities
+        val entities = Analyzer.detectEntities(title, dictionary)
+        println(Formatters.formatNERResult(title, entities))
+        entities
       }
     }
 

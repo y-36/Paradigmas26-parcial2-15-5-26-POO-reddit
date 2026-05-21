@@ -11,21 +11,18 @@ object Analyzer {
    * @param dictionary lista de entidades conocidas (cargadas desde los diccionarios)
    * @return lista de entidades cuyo texto aparece en el texto analizado
    */
-  def detectEntities(text: String, dictionary: List[NamedEntity]): List[NamedEntity] = {
-    dictionary.filter(entity => entity.matches(text))
+def detectEntities(
+      text: String,
+      dictionary: List[NamedEntity]
+  ): List[NamedEntity] = {
+    dictionary.filter { entity =>
+      val escapedText = java.util.regex.Pattern.quote(entity.text)
+      // (?<!\w) significa "que no tenga una letra/número a la izquierda"
+      // (?!\w) significa "que no tenga una letra/número a la derecha"
+      val regex = s"(?i)(?<!\\w)$escapedText(?!\\w)".r
+      regex.findFirstIn(text).isDefined
+    }
   }
-
-  /**
-   * Detecta solo las entidades relevantes que hacen match en el texto.
-   *
-   * @param text       texto a analizar
-   * @param dictionary lista de entidades conocidas
-   * @return lista de entidades relevantes (isRelevant == true) que hacen match
-   */
-  def detectRelevant(text: String, dictionary: List[NamedEntity]): List[NamedEntity] = {
-    dictionary.filter(entity => entity.isRelevant && entity.matches(text))
-  }
-
   /**
    * Cuenta cuántas entidades de cada tipo fueron detectadas.
    *
